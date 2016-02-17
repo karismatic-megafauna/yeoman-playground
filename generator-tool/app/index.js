@@ -13,7 +13,7 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the <% - superb %> '+ chalk.red('Procore') + ' generator!'
+      'Welcome to the superb '+ chalk.red('Procore') + ' generator!'
     ));
 
     var prompts = [{
