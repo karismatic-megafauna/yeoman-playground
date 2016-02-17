@@ -1,0 +1,15 @@
+{
+  "name": "generator-tool",
+  "version": "1.0.0",
+  "description": "Scaffolds a simple todo app in compliance with Procore",
+  "files" : [
+    "app",
+    "second"
+  ],
+  "keywords": ["yeoman-generator"],
+  "dependencies": {
+    "yeoman-generator": "^0.20.2"
+  },
+  "author": "Michael Hinrichs",
+  "license": "ISC"
+}
