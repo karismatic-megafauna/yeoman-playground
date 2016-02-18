@@ -6,7 +6,6 @@ var yosay = require('yosay');
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-    this.option('coffee');
   },
 
   prompting: function () {
