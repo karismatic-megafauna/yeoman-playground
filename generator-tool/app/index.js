@@ -16,24 +16,23 @@ module.exports = generators.Base.extend({
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true,
+      name: 'toolName',
+      message: 'What would you like to call your tool?',
     }];
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, function(props) {
+
       this.props = props;
-      // to access props later use this.props.someOption;
 
       done();
     }.bind(this));
   },
 
   writing: function () {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.destinationPath('dummyfile.txt'),
+      { title: this.props.toolName }
     );
   },
 });
