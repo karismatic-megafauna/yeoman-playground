@@ -9,6 +9,7 @@ const <%= tool %> = React.createClass({
   // TODO: figure out what component is
   render() {
     return (
+      // TODO: define the store
       <Provider store={store}>
         <Component passedDownProp={aProp} />
       </Provider>
