@@ -3,6 +3,7 @@ var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
 var chalk = require('chalk');
 var yosay = require('yosay');
+// NOTE: fs is wrapped by yeoman
 
 function capitalize(str) {
   return str.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
@@ -17,7 +18,7 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the superb '+ chalk.red('Procore') + ' generator!'
+      'Welcome to the superb ' + chalk.red('Procore') + ' generator!'
     ));
 
     var prompts = [{
@@ -44,6 +45,11 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('index.js'),
       this.destinationPath(this.toolBase + '/components/index.js'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleComp.jsx'),
+      this.destinationPath(this.toolBase + '/components/' + this.toolName + '.jsx'),
       { tool: this.toolName }
     );
   },
