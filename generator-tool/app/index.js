@@ -21,26 +21,25 @@ module.exports = generators.Base.extend({
       message: 'What would you like to call your tool?',
     }];
 
-    this.prompt(prompts, function(props) {
-
-      this.props = props;
+    this.prompt(prompts, function(answers) {
+      this.toolName = answers.toolName;
 
       done();
     }.bind(this));
   },
 
   app: function () {
-    mkdirp('src/_shared/tools/' + this.props.toolName + '/components');
-    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/ducks');
-    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/selectors');
-    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/dispatch');
+    mkdirp('src/_shared/tools/' + this.toolName + '/components');
+    mkdirp('src/_shared/tools/' + this.toolName + '/redux/ducks');
+    mkdirp('src/_shared/tools/' + this.toolName + '/redux/selectors');
+    mkdirp('src/_shared/tools/' + this.toolName + '/redux/dispatch');
   },
 
   writing: function () {
     this.fs.copyTpl(
       this.templatePath('dummyfile.txt'),
       this.destinationPath('dummyfile.txt'),
-      { title: this.props.toolName }
+      { title: this.toolName }
     );
   },
 });
