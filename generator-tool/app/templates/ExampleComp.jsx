@@ -1,20 +1,33 @@
-import React, { PropTypes } from 'react';
-import { Provider } from 'react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import Counter from './Counter';
+import counter from './reducers';
 
-const <%= tool %> = React.createClass({
-  propTypes: {
-    aProp: PropTypes.string,
-  }
+const store = createStore(counter);
+const mountPoint = document.getElementById('mountPoint');
 
-  // TODO: figure out what component is
-  render() {
-    return (
-      // TODO: define the store
-      <Provider store={store}>
-        <Component passedDownProp={aProp} />
-      </Provider>
-    )
-  },
-});
+function render() {
+  ReactDom.render(
+    <div>
+      <div>
+        {store.getState()}
+      </div>
+      <Button onClick={this.props.increment()}>
+        increment
+      </Button>
+      <Button onDecrement={this.props.decrement()}>
+        decrement
+      </Button>
+    </div>,
+    mountPoint
+  )
+}
 
-export default <%= tool %>;
+// render();
+// store.subscribe(render);
+export default connect(
+  counterSelector,
+  counterMapDispatch,
+)(Counter);
+

@@ -37,7 +37,9 @@ module.exports = generators.Base.extend({
   dirs: function () {
     mkdirp(this.toolBase + '/components');
     mkdirp(this.toolBase + '/redux/ducks');
+    mkdirp(this.toolBase + '/redux/ducks/__tests__/');
     mkdirp(this.toolBase + '/redux/selectors');
+    mkdirp(this.toolBase + '/redux/selectors/__tests__/');
     mkdirp(this.toolBase + '/redux/dispatch');
   },
 
@@ -50,6 +52,31 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('ExampleComp.jsx'),
       this.destinationPath(this.toolBase + '/components/' + this.toolName + '.jsx'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleDuck.js'),
+      this.destinationPath(this.toolBase + '/redux/ducks/' + this.toolName + '.js'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleTestDuck.js'),
+      this.destinationPath(this.toolBase + '/redux/ducks/__tests__/' + this.toolName + '-test.js'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleSelector.js'),
+      this.destinationPath(this.toolBase + '/redux/selectors/' + this.toolName + '.js'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleTestSelector.js'),
+      this.destinationPath(this.toolBase + '/redux/selectors/__tests__/' + this.toolName + '-test.js'),
+      { tool: this.toolName }
+    );
+    this.fs.copyTpl(
+      this.templatePath('ExampleDispatch.js'),
+      this.destinationPath(this.toolBase + '/redux/dispatch/' + this.toolName + '.js'),
       { tool: this.toolName }
     );
   },
