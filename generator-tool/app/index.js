@@ -1,5 +1,6 @@
 'use strict';
 var generators = require('yeoman-generator');
+var mkdirp = require('mkdirp');
 var chalk = require('chalk');
 var yosay = require('yosay');
 
@@ -26,6 +27,13 @@ module.exports = generators.Base.extend({
 
       done();
     }.bind(this));
+  },
+
+  app: function () {
+    mkdirp('src/_shared/tools/' + this.props.toolName + '/components');
+    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/ducks');
+    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/selectors');
+    mkdirp('src/_shared/tools/' + this.props.toolName + '/redux/dispatch');
   },
 
   writing: function () {
