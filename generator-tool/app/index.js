@@ -1,16 +1,13 @@
-// TODO: add the .yo-rc file to make the root of the project the same!
-// TODO: move all of the commetns to another generator and
-// keep this one clean
-
 'use strict';
+// TODO: add the .yo-rc file to make the root of the project the same!
+// TODO: move all of the commetns to another generator and keep this one clean
+
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
-var ncp = require('ncp').ncp;
 var chalk = require('chalk');
 var yosay = require('yosay');
+var fse = require('fs-extra');
 // NOTE: fs is wrapped by yeoman
-
-ncp.limit = 16;
 
 function capitalize(str) {
   return str.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
@@ -48,17 +45,7 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     mkdirp(this.toolBase);
-    ncp(this.templatePath('redux'), this.destinationPath(this.toolBase), function (err) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log('redux copied!');
-    });
-    ncp(this.templatePath('components'), this.destinationPath(this.toolBase), function (err) {
-      if (err) {
-        return console.error(err);
-      }
-      console.log('react copied!');
-    });
+    fse.copySync(this.templatePath('redux'), this.destinationPath(this.toolBase));
+    fse.copySync(this.templatePath('components'), this.destinationPath(this.toolBase));
   },
 });
