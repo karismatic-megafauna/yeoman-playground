@@ -1,5 +1,10 @@
 'use strict';
-// TODO: add the .yo-rc file to make the root of the project the same!
+// TODO: Add the .yo-rc file to make the root of the project the same!
+// TODO: Create .md file that describes the two changes left to make
+//      - change 1, edit the bundle.js file and add the counter tool
+//      - change 2, find an html.erb file, put a script tag in it with the proper React calls and an html mount point
+//      - If they get erros, go to the documentation
+// TODO: Print out link to .md file
 // TODO: move all of the commetns to another generator and keep this one clean
 
 var generators = require('yeoman-generator');
@@ -37,7 +42,6 @@ module.exports = generators.Base.extend({
       // this.toolName = capitalize(answers.toolName).replace(/\s+/g, '');
       // TEMPORARY OVERRIDE
       this.toolName = 'counter';
-
       this.toolBase = 'src/_shared/tools/' + this.toolName;
       done();
     }.bind(this));
