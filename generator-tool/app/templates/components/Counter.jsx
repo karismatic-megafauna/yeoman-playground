@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import Counter from './Counter';
-import counter from './reducers';
+import counter from './redux/ducks/counter.js';
+import conterSelector from './redux/selectors/counter.js';
+import conterMapDispatch from './redux/dispatch/counter.js';
 
 const store = createStore(counter);
 const mountPoint = document.getElementById('mountPoint');
 
+// TODO: make this a react component
 function render() {
   ReactDom.render(
     <div>
@@ -24,8 +26,7 @@ function render() {
   )
 }
 
-// render();
-// store.subscribe(render);
+// TODO: connect it to this component
 export default connect(
   counterSelector,
   counterMapDispatch,

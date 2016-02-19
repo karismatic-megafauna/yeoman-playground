@@ -5,6 +5,10 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 // NOTE: fs is wrapped by yeoman
 
+var ncp = require('ncp').ncp;
+
+ncp.limit = 16;
+
 function capitalize(str) {
   return str.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 };
@@ -27,57 +31,31 @@ module.exports = generators.Base.extend({
     }];
 
     this.prompt(prompts, function(answers) {
-      this.toolName = capitalize(answers.toolName).replace(/\s+/g, '');
+      // this.toolName = capitalize(answers.toolName).replace(/\s+/g, '');
+      // TEMPORARY OVERRIDE
+      this.toolName = 'counter';
 
       this.toolBase = 'src/_shared/tools/' + this.toolName;
       done();
     }.bind(this));
   },
 
-  dirs: function () {
-    mkdirp(this.toolBase + '/components');
-    mkdirp(this.toolBase + '/redux/ducks');
-    mkdirp(this.toolBase + '/redux/ducks/__tests__/');
-    mkdirp(this.toolBase + '/redux/selectors');
-    mkdirp(this.toolBase + '/redux/selectors/__tests__/');
-    mkdirp(this.toolBase + '/redux/dispatch');
+  app: function () {
+    mkdirp(this.toolBase);
   },
 
   writing: function () {
-    this.fs.copyTpl(
-      this.templatePath('index.js'),
-      this.destinationPath(this.toolBase + '/components/index.js'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleComp.jsx'),
-      this.destinationPath(this.toolBase + '/components/' + this.toolName + '.jsx'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleDuck.js'),
-      this.destinationPath(this.toolBase + '/redux/ducks/' + this.toolName + '.js'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleTestDuck.js'),
-      this.destinationPath(this.toolBase + '/redux/ducks/__tests__/' + this.toolName + '-test.js'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleSelector.js'),
-      this.destinationPath(this.toolBase + '/redux/selectors/' + this.toolName + '.js'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleTestSelector.js'),
-      this.destinationPath(this.toolBase + '/redux/selectors/__tests__/' + this.toolName + '-test.js'),
-      { tool: this.toolName }
-    );
-    this.fs.copyTpl(
-      this.templatePath('ExampleDispatch.js'),
-      this.destinationPath(this.toolBase + '/redux/dispatch/' + this.toolName + '.js'),
-      { tool: this.toolName }
-    );
+    ncp(this.templatePath('redux'), this.destinationPath(this.toolBase), function (err) {
+      if (err) {
+        return console.error(err);
+      }
+      console.log('done!');
+    });
+    ncp(this.templatePath('components'), this.destinationPath(this.toolBase), function (err) {
+      if (err) {
+        return console.error(err);
+      }
+      console.log('done!');
+    });
   },
 });

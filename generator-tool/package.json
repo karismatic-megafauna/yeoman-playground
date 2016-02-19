@@ -16,5 +16,8 @@
     "yosay": "^1.1.0"
   },
   "author": "Michael Hinrichs",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ncp": "^2.0.0"
+  }
 }
