@@ -48,8 +48,12 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    mkdirp(this.toolBase);
+    mkdirp.sync(this.toolBase);
     fse.copySync(this.templatePath('redux'), this.destinationPath(this.toolBase));
     fse.copySync(this.templatePath('components'), this.destinationPath(this.toolBase));
+  },
+
+  postInstall: function () {
+    this.log('Congratulations! The counter component is installed in: \n' + this.destinationPath(this.toolBase));
   },
 });
