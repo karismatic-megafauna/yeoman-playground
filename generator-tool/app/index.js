@@ -1,11 +1,14 @@
+// TODO: add the .yo-rc file to make the root of the project the same!
+// TODO: move all of the commetns to another generator and
+// keep this one clean
+
 'use strict';
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
+var ncp = require('ncp').ncp;
 var chalk = require('chalk');
 var yosay = require('yosay');
 // NOTE: fs is wrapped by yeoman
-
-var ncp = require('ncp').ncp;
 
 ncp.limit = 16;
 
@@ -25,9 +28,12 @@ module.exports = generators.Base.extend({
       'Welcome to the superb ' + chalk.red('Procore') + ' generator!'
     ));
 
+    // NOTE: commenting out for V1, will add this back for v2
     var prompts = [{
+      type: 'confirm',
       name: 'toolName',
-      message: 'What would you like to call your tool?',
+      message: 'Would you like to make a counter React / Redux sample application?',
+      default: true,
     }];
 
     this.prompt(prompts, function(answers) {
@@ -40,22 +46,19 @@ module.exports = generators.Base.extend({
     }.bind(this));
   },
 
-  app: function () {
-    mkdirp(this.toolBase);
-  },
-
   writing: function () {
+    mkdirp(this.toolBase);
     ncp(this.templatePath('redux'), this.destinationPath(this.toolBase), function (err) {
       if (err) {
         return console.error(err);
       }
-      console.log('done!');
+      console.log('redux copied!');
     });
     ncp(this.templatePath('components'), this.destinationPath(this.toolBase), function (err) {
       if (err) {
         return console.error(err);
       }
-      console.log('done!');
+      console.log('react copied!');
     });
   },
 });
