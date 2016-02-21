@@ -54,6 +54,9 @@ module.exports = generators.Base.extend({
   },
 
   postInstall: function () {
-    this.log('Congratulations! The counter component is installed in: \n' + this.destinationPath(this.toolBase));
+    this.log('\nCongratulations! The counter component is installed in:');
+    this.log(this.destinationPath(this.toolBase));
+    this.log('\n-------- NEXT STEPS: --------\n');
+    this.log('Follow the instructions on this markdown file:\n');
   },
 });
