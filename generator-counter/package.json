@@ -1,10 +1,9 @@
 {
-  "name": "generator-tool",
+  "name": "generator-counter",
   "version": "1.0.0",
   "description": "Scaffolds a simple todo app in compliance with Procore",
   "files": [
-    "app",
-    "second"
+    "app"
   ],
   "keywords": [
     "yeoman-generator"
